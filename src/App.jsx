@@ -1,3 +1,8 @@
+import Header from "./components/Header/index";
 export default function App() {
-  return <div>Hello</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }

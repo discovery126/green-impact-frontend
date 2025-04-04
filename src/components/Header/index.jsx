@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./index.module.scss";
 import { Link } from "react-router";
+import { userAuth } from "../../hooks/use_auth";
+import Modal from "../Modal";
+import { Form } from "../Form";
+import AuthModal from "../AuthModal";
 
 export default function Header() {
+  const [modalLoginActive, setModalLoginActive] = useState(false);
+  const [modalRegisterActive, setModalRegisterActive] = useState(false);
+  const { auth } = userAuth();
   return (
     <header className={s["header"]}>
       <div className="container">
