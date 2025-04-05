@@ -1,0 +1,28 @@
+.categories-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  .categories__button {
+    padding: 8px;
+    color: #ffffff;
+    border: none;
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: #b8b8b8;
+  }
+
+  .categories__button:hover {
+    opacity: 0.5;
+  }
+
+  .categories__button--active {
+    padding: 8px;
+    color: #ffffff;
+    border: none;
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: #3cb371;
+  }
+}
