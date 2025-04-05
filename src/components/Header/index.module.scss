@@ -17,7 +17,6 @@
     font-size: 32px;
   }
   .nav-list {
-    cursor: pointer;
     display: flex;
     align-items: center;
     column-gap: 10px;
@@ -25,24 +24,30 @@
     flex-wrap: wrap;
 
     .nav-list__item {
+      cursor: pointer;
       padding: 10px;
     }
 
     .nav-list__link {
       color: #fff;
-    }
 
-    .nav-list__link:hover {
-      opacity: 0.5;
+      &:hover {
+        opacity: 0.5;
+      }
     }
-
-    .nav-list__item-btn {
-      background-color: #3cb371;
-      text-align: center;
-      width: 150px;
-      padding: 10px 20px;
-      border-radius: 6px;
-      box-shadow: 0px 2px 4px #00000040;
+  }
+  .nav-list__item-btn {
+    background-color: #3cb371;
+    text-align: center;
+    width: 150px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: 0px 2px 4px #00000040;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 0.3;
     }
   }
 }
