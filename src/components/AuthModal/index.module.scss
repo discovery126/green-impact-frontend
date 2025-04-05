@@ -8,3 +8,28 @@
   color: #e0e0e0;
   padding: 0 10px;
 }
+
+.nav-list__item-btn {
+  background-color: #3cb371;
+  text-align: center;
+  width: 150px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px #00000040;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.3;
+  }
+}
+.custom-toast-container {
+  position: absolute;
+  margin-right: 10px;
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  overflow: hidden;
+  z-index: 9999;
+}

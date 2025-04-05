@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./index.module.scss";
-import { userAuth } from "../../hooks/use_auth";
 import AuthModal from "../AuthModal";
+import { useSelector } from "react-redux";
 
 export default function Header() {
-  const { auth } = userAuth();
+  const { auth } = useSelector((state) => state.auth);
   return (
     <header className={s["header"]}>
       <div className="container">
@@ -45,9 +45,7 @@ export default function Header() {
                 </a>
               </li>
             ) : (
-              <li className={s["nav-list__item-btn"]}>
-                <AuthModal />
-              </li>
+              <AuthModal />
             )}
           </ul>
         </div>

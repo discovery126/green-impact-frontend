@@ -12,7 +12,6 @@ const Form = ({ title, onSubmit, fields, buttonText, children }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Сработала кнопка формы");
     onSubmit(values);
   };
 
