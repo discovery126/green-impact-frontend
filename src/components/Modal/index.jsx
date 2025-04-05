@@ -2,11 +2,13 @@ import s from "./index.module.scss";
 const Modal = ({ active, setActive, children }) => {
   return (
     <div
-      className={active ? s["modal_active"] : s["modal"]}
+      className={`${s["modal"]} ${active && s["modal--active"]}`}
       onClick={() => setActive(false)}
     >
       <div
-        className={active ? s["modal-content_active"] : s["modal-content"]}
+        className={`${s["modal__content"]} ${
+          active && s["modal__content--active"]
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

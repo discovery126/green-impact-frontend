@@ -11,8 +11,7 @@ export const fetchToken = createAsyncThunk(
       const response = await AuthService.login(_.email, _.password);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        const decoded = jwtDecode(response.data.token);
-        dispatch(setUser({ roles: decoded.roles }));
+        return jwtDecode(response.data.token).roles;
       }
     } catch (error) {
       if (!error.response) {
@@ -55,6 +54,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.auth = true;
+        state.roles = action.payload.roles;
       }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.error = action.payload;

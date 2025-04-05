@@ -10,21 +10,14 @@ const AuthModal = () => {
   const [modalLoginActive, setModalLoginActive] = useState(false);
   const [modalRegisterActive, setModalRegisterActive] = useState(false);
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, isSuccess } = useSelector((state) => state.auth);
 
   const handleLoginSubmit = async (values) => {
     dispatch(fetchToken({ email: values.email, password: values.password }));
-    if (!error) {
-      // Не работает
-      toast.success("Успешный вход");
-    } else {
-      toast.error(error);
-    }
   };
 
   const handleRegisterSubmit = async (values) => {
     try {
-      console.log("Registration Data:", values);
       const response = await AuthService.registration(
         values.email,
         values.display_name,
@@ -73,11 +66,11 @@ const AuthModal = () => {
           ]}
           buttonText="Войти"
         >
-          <p className={s["not_account-text"]}>
-            Есть аккаунт?
+          <div className={s["not_account--text"]}>
+            Нет аккаунта?
             <button
               type="button"
-              className={s["registration-text"]}
+              className={s["registration--text"]}
               onClick={() => {
                 setModalLoginActive(false);
                 setModalRegisterActive(true);
@@ -85,8 +78,7 @@ const AuthModal = () => {
             >
               Зарегистрироваться
             </button>
-          </p>
-          {loading && <h1>Loading...</h1>}
+          </div>
         </Form>
       </Modal>
 
@@ -116,11 +108,11 @@ const AuthModal = () => {
           ]}
           buttonText="Зарегистрироваться"
         >
-          <p className={s["not_account-text"]}>
-            Нет аккаунта?
+          <div className={s["not_account--text"]}>
+            Есть аккаунт?
             <button
               type="button"
-              className={s["login-text"]}
+              className={s["login--text"]}
               onClick={() => {
                 setModalLoginActive(true);
                 setModalRegisterActive(false);
@@ -128,14 +120,9 @@ const AuthModal = () => {
             >
               Войти
             </button>
-            {loading && <h1>Loading...</h1>}
-          </p>
+          </div>
         </Form>
       </Modal>
-      <ToastContainer
-        position="bottom-right"
-        className={s["custom-toast-container"]}
-      />
     </>
   );
 };
