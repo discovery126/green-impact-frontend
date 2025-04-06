@@ -7,6 +7,9 @@ export default class TaskService {
   static async getUserTasks() {
     return $api.get("/user/tasks");
   }
+  static async getActiveTasks() {
+    return $api.get("/user/active-tasks");
+  }
   static async getAllTaskCategories() {
     return $api.get("/tasks/categories");
   }

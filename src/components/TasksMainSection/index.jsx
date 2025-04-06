@@ -4,10 +4,12 @@ import Categories from "../Categories";
 import Tasks from "../Tasks";
 import s from "./index.module.scss";
 import { useEffect, useState } from "react";
+import ActiveTasks from "../ActiveTasks";
 export default function TasksMainSection() {
   const [selectedCategory, setSelectedCategory] = useState("Все");
   const [categories, setCategories] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [activeTasks, setActiveTasks] = useState([]);
   const { auth } = useSelector((state) => state.auth);
   const fetchCategories = async () => {
     try {
@@ -27,6 +29,16 @@ export default function TasksMainSection() {
     }
   };
 
+  const fetchActiveUserTasks = async () => {
+    try {
+      const response = await TaskService.getActiveTasks();
+      setActiveTasks(response.data);
+    } catch (error) {
+      console.log(error.response);
+      console.error("Ошибка при загрузке задач:", error);
+    }
+  };
+
   const fetchAllTasks = async () => {
     try {
       const response = await TaskService.getAllTasks();
@@ -39,6 +51,7 @@ export default function TasksMainSection() {
     fetchCategories();
     if (auth) {
       fetchUserTasks();
+      fetchActiveUserTasks();
     } else {
       fetchAllTasks();
     }
@@ -62,6 +75,7 @@ export default function TasksMainSection() {
           />
           <div className={s["tasks-section__list"]}>
             <Tasks tasks={filteredTasks} />
+            <ActiveTasks activeTasks={activeTasks} auth={auth} />
           </div>
         </div>
       </div>

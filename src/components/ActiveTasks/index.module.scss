@@ -1,0 +1,74 @@
+.active-tasks {
+  min-width: 420px;
+  min-height: 500px;
+  background-color: #f5f7f9;
+  border-radius: 15px;
+  font-weight: bold;
+  filter: drop-shadow(0 2px 2px #00000020);
+
+  .active-tasks__header {
+    font-size: 30px;
+    text-align: left;
+    padding: 10px 20px;
+  }
+
+  .active-tasks__section {
+    // display: flex;
+    min-height: 500px;
+    flex-direction: column;
+    padding: 10px 0px;
+
+    .active-tasks__section-title {
+      font-size: 18px;
+      padding: 5px 20px;
+    }
+
+    .active-tasks__card-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .active-tasks__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100px;
+        gap: 6px;
+        padding: 16px 20px;
+        background-color: #f5f7f9;
+        border-radius: 14px;
+
+        .active-tasks__category {
+          color: #3498db;
+          font-size: 16px;
+        }
+
+        .active-tasks__info {
+          display: flex;
+          justify-content: space-between;
+          gap: 8px;
+          font-size: 18px;
+
+          .active-tasks__title {
+            flex-grow: 1;
+          }
+
+          .active-tasks__points {
+            color: #2ecc71;
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.active-tasks .active-tasks__divider {
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  border: none;
+  border-top: 1px solid #333;
+}
