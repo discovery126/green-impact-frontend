@@ -4,14 +4,15 @@ import { jwtDecode } from "jwt-decode";
 
 export const fetchToken = createAsyncThunk(
   "auth/fetchToken",
-  async function (_, { rejectWithValue, dispatch }) {
+  async function (_, { rejectWithValue }) {
     const errorMessage500 =
       "Не удается подключиться к серверу. Попробуйте позже.";
     try {
       const response = await AuthService.login(_.email, _.password);
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        return jwtDecode(response.data.token).roles;
+        const decoded = jwtDecode(response.data.token);
+        return decoded.roles;
       }
     } catch (error) {
       if (!error.response) {
@@ -30,7 +31,7 @@ export const fetchToken = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    auth: false,
+    auth: !!localStorage.getItem('token'),
     roles: [],
     loading: false,
     error: null,
@@ -46,16 +47,16 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchToken.pending, (state) => {
+    builder.addCase(fetchToken.pending, (state, action) => {
       state.loading = true;
       state.error = null;
     }),
-      builder.addCase(fetchToken.fulfilled, (state) => {
+      builder.addCase(fetchToken.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.auth = true;
         state.roles = action.payload.roles;
-      }),
+    }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;

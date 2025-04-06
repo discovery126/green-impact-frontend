@@ -11,6 +11,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.4s;
+  z-index: 9999;
 }
 .modal--active {
   transition: 0.4s;
@@ -22,6 +23,7 @@
   transform: scale(0.5);
   width: 50vw;
   transition: 0.4s all;
+
 }
 .modal__content--active {
   transition: 0.4s all;
