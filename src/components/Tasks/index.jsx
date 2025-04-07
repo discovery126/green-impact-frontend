@@ -1,8 +1,25 @@
+import { useState } from "react";
+import { formatPoints, selectType } from "../../util/UtilService";
 import s from "./index.module.scss";
+import TaskModal from "../TaskModal";
+import CountdownTimer from "../CountDownTimer";
 
-export default function Tasks({ tasks }) {
+export default function Tasks({ tasks, refreshTasks }) {
+  const [modalTaskActive, setModalTaskActive] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+
   const truncateText = (text, maxLength) =>
     text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
+  const getExpiredDate = (task) => {
+    if (task.task_type === "DAILY") {
+      const now = new Date();
+      return new Date(now.setHours(23, 59, 59, 999));
+    } else {
+      return null;
+      // return new Date(task.expired_date);
+    }
+  };
 
   return (
     <div className={s["task-list"]}>
@@ -12,9 +29,22 @@ export default function Tasks({ tasks }) {
         </div>
       ) : (
         tasks.map((task) => (
-          <div key={task.id} className={s["task-card"]}>
-            <div className={s["task-card__category"]}>
-              {task.category.category_name}
+          <div
+            key={task.id}
+            onClick={() => {
+              setSelectedTask(task);
+              setModalTaskActive(true);
+            }}
+            className={s["task-card"]}
+          >
+            <div className={s["task-card__header"]}>
+              <div className={s["task-card__category"]}>
+                {task.category.category_name}
+              </div>
+              <div className={s["task-card__timer"]}>
+                <CountdownTimer expiredDate={getExpiredDate(task)} />
+              </div>
+              {selectType(task)}
             </div>
             <div className={s["task-card__body"]}>
               <div className={s["task-card__title"]}>{task.title}</div>
@@ -28,14 +58,12 @@ export default function Tasks({ tasks }) {
           </div>
         ))
       )}
+      <TaskModal
+        task={selectedTask}
+        modalTaskActive={modalTaskActive}
+        setModalTaskActive={setModalTaskActive}
+        refreshTasks={refreshTasks}
+      />
     </div>
   );
-
-  function formatPoints(n) {
-    const forms = ["балл", "балла", "баллов"];
-    if (n % 10 === 1 && n % 100 !== 11) return `${n} ${forms[0]}`; // 1 балл
-    if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20))
-      return `${n} ${forms[1]}`; // 2-4 балла
-    return `${n} ${forms[2]}`; // 5+ баллов
-  }
 }

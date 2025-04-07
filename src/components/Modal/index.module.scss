@@ -13,19 +13,19 @@
   transition: 0.4s;
   z-index: 9999;
 }
+
 .modal--active {
-  transition: 0.4s;
   opacity: 1;
   pointer-events: all;
 }
-.modal__content {
-  padding: 20px;
-  transform: scale(0.5);
-  width: 50vw;
-  transition: 0.4s all;
 
-}
-.modal__content--active {
+.modal__content {
+  border-radius: 15px;
+  filter: drop-shadow(0 2px 2px #00000030);
+  padding: 30px;
   transition: 0.4s all;
+}
+
+.modal__content--active {
   transform: scale(1);
 }

@@ -1,9 +1,9 @@
 .tasks-section {
   background-color: #f5f5dc;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-end;
+  // align-items: flex-start;
 
   .tasks-section__content {
     height: 100%;
