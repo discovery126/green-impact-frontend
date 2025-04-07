@@ -16,4 +16,7 @@ export default class TaskService {
   static async takeTaskUser(id) {
     return $api.post(`user/tasks/${id}/take`);
   }
+  static async submitTaskFiles(taskId, formData) {
+    return $api.post(`user/tasks/${taskId}/submit`, formData);
+  }
 }

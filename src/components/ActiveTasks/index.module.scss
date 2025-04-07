@@ -8,7 +8,7 @@
   font-weight: bold;
   filter: drop-shadow(0 2px 2px #00000020);
 
-  .active-tasks__header {
+  .active-tasks__main-title {
     font-size: 30px;
     text-align: left;
     padding: 10px 20px;
@@ -26,10 +26,11 @@
       padding: 5px 20px;
     }
 
-    .active-tasks__card-wrapper {
+    .active-tasks__cards {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      cursor: pointer;
 
       .active-tasks__card {
         display: flex;
@@ -39,14 +40,21 @@
         gap: 6px;
         padding: 16px 20px;
         background-color: #f5f7f9;
-        border-radius: 14px;
-
+        &:hover {
+          background-color: #ecf2fe;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+        }
+        .active-tasks__header {
+          display: flex;
+          justify-content: space-between;
+        }
         .active-tasks__category {
           color: #3498db;
           font-size: 16px;
         }
 
-        .active-tasks__info {
+        .active-tasks__card-info {
           display: flex;
           justify-content: space-between;
           gap: 8px;

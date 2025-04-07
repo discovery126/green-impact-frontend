@@ -81,7 +81,11 @@ export default function TasksMainSection() {
           />
           <div className={s["tasks-section__list"]}>
             <Tasks tasks={filteredTasks} refreshTasks={refreshTasks} />
-            <ActiveTasks activeTasks={activeTasks} auth={auth} />
+            <ActiveTasks
+              activeTasks={activeTasks}
+              auth={auth}
+              refreshTasks={refreshTasks}
+            />
           </div>
         </div>
       </div>
