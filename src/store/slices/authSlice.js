@@ -31,7 +31,7 @@ export const fetchToken = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    auth: !!localStorage.getItem('token'),
+    auth: !!localStorage.getItem("token"),
     roles: [],
     loading: false,
     error: null,
@@ -56,7 +56,7 @@ const authSlice = createSlice({
         state.error = null;
         state.auth = true;
         state.roles = action.payload.roles;
-    }),
+      }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;

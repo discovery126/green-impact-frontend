@@ -3,7 +3,7 @@ import s from "./index.module.scss";
 import AuthModal from "../AuthModal";
 import { useSelector } from "react-redux";
 
-export default function Header() {
+const Header = () => {
   const { auth } = useSelector((state) => state.auth);
   return (
     <header className={s["header"]}>
@@ -52,4 +52,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

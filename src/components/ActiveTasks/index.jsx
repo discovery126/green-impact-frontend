@@ -2,10 +2,11 @@ import { formatPoints, selectType } from "../../util/UtilService";
 import s from "./index.module.scss";
 import { useState } from "react";
 import ActiveTaskModal from "../ActiveTaskModal";
-export default function ActiveTasks({ activeTasks, auth, refreshTasks }) {
+
+const ActiveTasks = ({ activeTasks, auth, refreshTasks }) => {
   const [modalTaskActive, setModalTaskActive] = useState(false);
   const [selectedActiveTask, setSelectedActiveTask] = useState(null);
-  console.log(activeTasks)
+  
   return (
     <>
       <ActiveTaskModal
@@ -19,8 +20,8 @@ export default function ActiveTasks({ activeTasks, auth, refreshTasks }) {
         <div className={s["active-tasks__section"]}>
           <div className={s["active-tasks__section-title"]}>Активные</div>
           <hr className={s["active-tasks__divider"]} />
-          
-          {auth && activeTasks.length>0 ? (
+
+          {auth && activeTasks.length > 0 ? (
             activeTasks.map((active_task) => (
               <div
                 key={active_task.id}
@@ -58,4 +59,6 @@ export default function ActiveTasks({ activeTasks, auth, refreshTasks }) {
       </div>
     </>
   );
-}
+};
+
+export default ActiveTasks;

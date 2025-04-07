@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { IoTimerOutline } from "react-icons/io5";
 import s from "./index.module.scss";
-function CountdownTimer({ expiredDate }) {
+
+const CountdownTimer = ({ expiredDate }) => {
   const calculateTimeLeft = () => {
     const difference = new Date(expiredDate) - new Date();
     if (difference <= 0) return null;
@@ -30,6 +31,6 @@ function CountdownTimer({ expiredDate }) {
       {timeLeft.hours}ч {timeLeft.minutes}м
     </div>
   );
-}
+};
 
 export default CountdownTimer;

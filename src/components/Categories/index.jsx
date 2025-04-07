@@ -1,10 +1,6 @@
 import s from "./index.module.scss";
 
-export default function Categories({
-  categories,
-  selectedCategory,
-  setSelectedCategory,
-}) {
+const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
   const all = "Все";
 
   return (
@@ -33,4 +29,5 @@ export default function Categories({
       })}
     </div>
   );
-}
+};
+export default Categories;

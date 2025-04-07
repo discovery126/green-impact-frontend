@@ -6,6 +6,7 @@ import AuthService from "../../http/AuthService";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import { fetchToken } from "../../store/slices/authSlice";
+
 const AuthModal = () => {
   const [modalLoginActive, setModalLoginActive] = useState(false);
   const [modalRegisterActive, setModalRegisterActive] = useState(false);

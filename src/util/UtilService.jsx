@@ -15,4 +15,5 @@ const selectType = (task) => {
     return null;
   }
 };
+
 export { formatPoints, selectType };

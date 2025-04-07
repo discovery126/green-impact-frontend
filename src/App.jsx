@@ -1,8 +1,9 @@
 import Header from "./components/Header/index";
-export default function App() {
+const App = () => {
   return (
     <div>
       <Header />
     </div>
   );
-}
+};
+export default App;

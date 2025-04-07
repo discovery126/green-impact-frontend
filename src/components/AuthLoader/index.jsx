@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { setUser } from "../../store/slices/authSlice";
+
 const AuthLoader = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.auth);

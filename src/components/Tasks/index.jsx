@@ -4,7 +4,7 @@ import s from "./index.module.scss";
 import TaskModal from "../TaskModal";
 import CountdownTimer from "../CountDownTimer";
 
-export default function Tasks({ tasks, refreshTasks }) {
+const Tasks = ({ tasks, refreshTasks }) => {
   const [modalTaskActive, setModalTaskActive] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
@@ -66,4 +66,6 @@ export default function Tasks({ tasks, refreshTasks }) {
       />
     </div>
   );
-}
+};
+
+export default Tasks;

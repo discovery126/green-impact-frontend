@@ -6,7 +6,7 @@ import s from "./index.module.scss";
 import { useEffect, useState } from "react";
 import ActiveTasks from "../ActiveTasks";
 
-export default function TasksMainSection() {
+const TasksMainSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Все");
   const [categories, setCategories] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -91,4 +91,6 @@ export default function TasksMainSection() {
       </div>
     </div>
   );
-}
+};
+
+export default TasksMainSection;

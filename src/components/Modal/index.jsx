@@ -1,4 +1,5 @@
 import s from "./index.module.scss";
+
 const Modal = ({ active, setActive, children }) => {
   return (
     <div
