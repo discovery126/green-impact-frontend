@@ -5,7 +5,6 @@ export default class RewardService {
     return $api.get("/rewards");
   }
   static async claimReward(rewardId) {
-    console.log(rewardId);
     return $api.post(`/user/rewards/${rewardId}/exchange`);
   }
 }

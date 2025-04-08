@@ -9,12 +9,14 @@ import RewardsPage from "./page/RewardsPage/index";
 import "./reset.css";
 import "./main.css";
 import AuthLoader from "./components/AuthLoader";
-import { Slide, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import RatingPage from "./page/RatingPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/tasks", element: <TasksPage /> },
   { path: "/rewards", element: <RewardsPage /> },
+  { path: "/rating", element: <RatingPage /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -36,7 +38,6 @@ root.render(
       <Provider store={store}>
         <RouterProvider router={router} />
         <AuthLoader />
-        
       </Provider>
     </React.StrictMode>
   </>

@@ -19,8 +19,10 @@ const TasksMainSection = () => {
     } catch (error) {
       if (error.status === 401) {
         toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.log("Ошибка получения наград: " + error);
       }
-      console.log("Ошибка " + error);
     }
   };
 
@@ -31,8 +33,10 @@ const TasksMainSection = () => {
     } catch (error) {
       if (error.status === 401) {
         toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.log("Ошибка получения наград: " + error);
       }
-      console.log("Ошибка получения наград: " + error);
     }
   };
   const refreshRewards = async () => {
