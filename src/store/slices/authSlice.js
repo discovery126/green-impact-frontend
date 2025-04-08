@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "../../http/AuthService";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 
 export const fetchToken = createAsyncThunk(
   "auth/fetchToken",
@@ -56,10 +57,12 @@ const authSlice = createSlice({
         state.error = null;
         state.auth = true;
         state.roles = action.payload.roles;
+        toast.success("Успешный вход")
       }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+        toast.error(action.payload);
       });
   },
 });

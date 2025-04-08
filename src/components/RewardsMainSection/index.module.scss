@@ -1,0 +1,57 @@
+.reward-section {
+  padding: 1rem;
+  background-color: #f5f5dc;
+  min-height: 100vh;
+
+  .reward-section__user-points {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.rewards-content {
+  display: flex;
+  justify-content: center;
+
+  .rewards-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.6rem;
+    width: 100%;
+    height: 200px;
+    max-width: 1200px;
+    padding: 16px 24px;
+
+    .reward-card {
+      background-color: #f5f7f9;
+      border: 1px solid #e0e0e0;
+      font-weight: bold;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .reward-card__category {
+        font-size: 16px;
+        color: #3498db;
+      }
+
+      .reward-card__title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .reward-card__cost {
+        font-size: 18px;
+        color: #2ecc71;
+      }
+    }
+  }
+}
