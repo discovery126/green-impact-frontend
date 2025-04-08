@@ -3,6 +3,7 @@ import Modal from "../Modal";
 import s from "./index.module.scss";
 import { formatPoints, selectType } from "../../util/UtilService";
 import TaskService from "../../http/TaskService";
+import { toast } from "react-toastify";
 
 const ActiveTaskModal = ({
   activeTask,
@@ -12,28 +13,34 @@ const ActiveTaskModal = ({
 }) => {
   const [comment, setComment] = useState("");
   const [files, setFiles] = useState([]);
-  console.log(activeTask);
+
   const handleStartTask = async () => {
     if (files.length === 0) return;
 
     const formData = new FormData();
     if (files && files.length > 0) {
       Array.from(files).forEach((file) => {
-        console.log(file);
         formData.append("photos", file);
       });
     }
     formData.append("comment", comment);
-    console.log(comment);
-    console.log(files);
+
     try {
       await TaskService.submitTaskFiles(activeTask.id, formData);
       await refreshTasks();
       setModalTaskActive(false);
       setComment("");
       setFiles([]);
+      toast.success("Задание отправлено на проверку");
     } catch (error) {
-      console.error("Ошибка при отправке задания:", error);
+      if (error.status === 400) {
+        toast.error(error.response.data["error_details"][0]);
+      } else if (error.status === 401) {
+        toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.error("Ошибка при отправке задания:", error);
+      }
     }
   };
 

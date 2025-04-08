@@ -22,6 +22,7 @@ const CountdownTimer = ({ expiredDate }) => {
     return () => clearInterval(timer);
   }, [expiredDate]);
 
+  if (!expiredDate) return;
   if (!timeLeft) return;
 
   return (

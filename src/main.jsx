@@ -34,8 +34,9 @@ root.render(
     />
     <React.StrictMode>
       <Provider store={store}>
-        <AuthLoader />
         <RouterProvider router={router} />
+        <AuthLoader />
+        
       </Provider>
     </React.StrictMode>
   </>

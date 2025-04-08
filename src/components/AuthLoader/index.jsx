@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { setUser } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router";
 
 const AuthLoader = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ const AuthLoader = () => {
         dispatch(setUser({ roles: decoded.roles }));
       } catch (e) {
         localStorage.removeItem("token");
-        navigate("/");
         console.error("Ошибка при декодировании токена", e);
       }
     }

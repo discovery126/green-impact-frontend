@@ -4,6 +4,7 @@ import s from "./index.module.scss";
 import { formatPoints, selectType } from "../../util/UtilService";
 import TaskService from "../../http/TaskService";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const TaskModal = ({
   task,
@@ -17,8 +18,16 @@ const TaskModal = ({
       await TaskService.takeTaskUser(task.id);
       await refreshTasks();
       setModalTaskActive(false);
+      toast.success("Задание успешно взято");
     } catch (error) {
-      console.error("Ошибка при старте задачи:", error);
+      if (error.status === 409 || error.status === 400) {
+        toast.error(error.response.data["error_details"][0]);
+      } else if (error.status === 401) {
+        toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.error("Ошибка при старте задачи:", error);
+      }
     }
   };
 

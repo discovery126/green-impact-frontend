@@ -18,6 +18,7 @@ const TasksMainSection = () => {
       const response = await TaskService.getAllTaskCategories();
       setCategories(response.data);
     } catch (error) {
+      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       console.error("Ошибка при загрузке категорий задач:", error);
     }
   };
@@ -25,10 +26,14 @@ const TasksMainSection = () => {
   const fetchUserTasks = async () => {
     try {
       const response = await TaskService.getUserTasks();
-      // console.log(response);
       setTasks(response.data);
     } catch (error) {
-      console.error("Ошибка при загрузке задач:", error);
+      if (error.status === 401) {
+        toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.error("Ошибка при загрузке задач:", error);
+      }
     }
   };
 
@@ -37,8 +42,11 @@ const TasksMainSection = () => {
       const response = await TaskService.getActiveTasks();
       setActiveTasks(response.data);
     } catch (error) {
-      console.log(error.response);
-      console.error("Ошибка при загрузке задач:", error);
+      if (error.status === 401) {
+        toast.error("Вы не авторизованы");
+      } else {
+        console.error("Ошибка при загрузке задач:", error);
+      }
     }
   };
 
@@ -47,6 +55,7 @@ const TasksMainSection = () => {
       const response = await TaskService.getAllTasks();
       setTasks(response.data);
     } catch (error) {
+      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       console.error("Ошибка при загрузке задач:", error);
     }
   };
