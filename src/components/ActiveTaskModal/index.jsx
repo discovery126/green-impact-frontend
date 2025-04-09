@@ -34,7 +34,7 @@ const ActiveTaskModal = ({
       toast.success("Задание отправлено на проверку");
     } catch (error) {
       if (error.status === 400) {
-        toast.error(error.response.data["error_details"][0]);
+        toast.error(error.response.data.message[0]);
       } else if (error.status === 401) {
         toast.error("Вы не авторизованы");
       } else {

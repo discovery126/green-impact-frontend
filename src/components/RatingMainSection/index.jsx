@@ -10,7 +10,7 @@ const RatingMainSection = () => {
   const fetchRatings = async () => {
     try {
       const response = await RatingService.getRating(sortBy);
-      setRatings(response.data);
+      setRatings(response.data.data);
     } catch (err) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }

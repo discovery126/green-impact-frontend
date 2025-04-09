@@ -11,8 +11,8 @@ export const fetchToken = createAsyncThunk(
     try {
       const response = await AuthService.login(_.email, _.password);
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-        const decoded = jwtDecode(response.data.token);
+        localStorage.setItem("token", response.data.data.token);
+        const decoded = jwtDecode(response.data.data.token);
         return decoded.roles;
       }
     } catch (error) {
@@ -20,9 +20,9 @@ export const fetchToken = createAsyncThunk(
         return rejectWithValue(errorMessage500);
       } else {
         if (error.status === 401) {
-          return rejectWithValue(error.response.data["error_details"][0]);
+          return rejectWithValue(error.response.data.message[0]);
         } else {
-          return rejectWithValue(error);
+          return rejectWithValue(error.response.data.message[0]);
         }
       }
     }

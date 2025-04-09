@@ -15,7 +15,7 @@ const TasksMainSection = () => {
   const getUser = async () => {
     try {
       const response = await UserService.getUser();
-      setUser(response.data);
+      setUser(response.data.data);
     } catch (error) {
       if (error.status === 401) {
         toast.error("Вы не авторизованы");
@@ -29,7 +29,7 @@ const TasksMainSection = () => {
   const getRewards = async () => {
     try {
       const response = await RewardService.getRewards();
-      setRewards(response.data);
+      setRewards(response.data.data);
     } catch (error) {
       if (error.status === 401) {
         toast.error("Вы не авторизованы");
