@@ -17,13 +17,16 @@
   .rewards-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 0.6rem;
+    gap: 0.7rem;
     width: 100%;
     height: 200px;
     max-width: 1200px;
     padding: 16px 24px;
 
     .reward-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       background-color: #f5f7f9;
       border: 1px solid #e0e0e0;
       font-weight: bold;
@@ -45,7 +48,6 @@
 
       .reward-card__title {
         font-size: 1.3rem;
-        margin-bottom: 0.5rem;
       }
 
       .reward-card__cost {

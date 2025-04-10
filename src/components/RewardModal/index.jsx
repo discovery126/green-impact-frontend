@@ -43,6 +43,7 @@ const RewardModal = ({
         <div className={s["reward-modal__cost"]}>
           {formatPoints(reward.cost_points)}
         </div>
+
         {auth ? (
           <button
             className={s["reward-modal__btn"]}
