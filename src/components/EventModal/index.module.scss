@@ -1,0 +1,75 @@
+.event-modal {
+  background-color: #F5F7F9;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+
+  .event-modal__title {
+    color: #333333;
+    font-size: 25px;
+    margin-bottom: 8px;
+  }
+  .event-card__mark {
+  }
+  .sheduled {
+    width: 40px;
+    height: 10px;
+    background-color: #a5d6a7;
+    margin-bottom: 8px;
+  }
+  .event-modal__address {
+    font-size: 18px;
+    color: #666666;
+    margin-bottom: 12px;
+  }
+  .event-modal__date {
+    font-size: 18px;
+    color: #4CAF50;
+    margin-bottom: 12px;
+  }
+  .event-modal__organizer-name {
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 12px;
+  }
+
+  .event-modal__organizer-number {
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 12px;
+  }
+
+  .event-modal__description {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+}
+.event-modal__btn {
+  background-color: #3CB371;
+  width: 100%;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.event-modal__btn:hover {
+    opacity: 0.8;
+}
+
+.event-modal__message {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #6f6f6f;
+  font-style: italic;
+  text-align: center;
+}

@@ -11,12 +11,14 @@ import "./main.css";
 import AuthLoader from "./components/AuthLoader";
 import { ToastContainer } from "react-toastify";
 import RatingPage from "./page/RatingPage";
+import EventsPage from "./page/EventsPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/tasks", element: <TasksPage /> },
   { path: "/rewards", element: <RewardsPage /> },
   { path: "/rating", element: <RatingPage /> },
+  { path: "/events", element: <EventsPage /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

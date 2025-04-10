@@ -15,5 +15,29 @@ const selectType = (task) => {
     return null;
   }
 };
+const formatDate = (event) => {
+  const startDate = new Date(event.start_date).toLocaleString("ru-RU", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-export { formatPoints, selectType };
+  const endDate = new Date(event.end_date).toLocaleString("ru-RU", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return `${startDate} - ${endDate}`;
+};
+const concatAddress = (event) => {
+  return `г. ${event.city.nameCity} ${event.street} ${
+    event.house_number ? event.house_number : ""
+  }`;
+};
+
+export { formatPoints, selectType, formatDate, concatAddress };

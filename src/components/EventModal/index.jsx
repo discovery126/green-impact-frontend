@@ -1,0 +1,113 @@
+import React, { useEffect, useState } from "react";
+import Modal from "../Modal";
+import s from "./index.module.scss";
+import { concatAddress, formatDate } from "../../util/UtilService";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import EventService from "../../http/EventService";
+
+const EventModal = ({
+  event,
+  modalEventActive,
+  setModalEventActive,
+  refreshEvents,
+}) => {
+  const [success, setSuccess] = useState(false);
+  const { auth } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (event && auth) {
+      fetchSuccess();
+    }
+  }, [auth, event]);
+
+  const fetchSuccess = async () => {
+    const result = await isRegisteredUserEvent(event);
+    setSuccess(result);
+  };
+  const isRegisteredUserEvent = async (event) => {
+    try {
+      const response = await EventService.checkRegistered(event.id);
+      return response.data.data.success;
+    } catch (error) {
+      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+    }
+  };
+
+  const handleSignUpEvent = async () => {
+    try {
+      if (!success) {
+        await EventService.registerEvent(event.id);
+        await refreshEvents();
+        setModalEventActive(false);
+        toast.success("Вы успешно записались на мероприятие");
+      } else {
+        toast.error("Вы уже зарегистрированы на это мероприятие");
+      }
+    } catch (error) {
+      if (error.status === 409 || error.status === 400) {
+        toast.error(error.response.data.message[0]);
+      } else if (error.status === 401) {
+        toast.error("Вы не авторизованы");
+      } else {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.error("Ошибка при записи на мероприятие:", error);
+      }
+    }
+  };
+
+  const showRegisterButton = () => {
+    if (auth && !success) {
+      return (
+        <button
+          className={s["event-modal__btn"]}
+          onClick={() => {
+            handleSignUpEvent(event.id);
+            setModalEventActive(false);
+          }}
+        >
+          Зарегистрироваться на мероприятие
+        </button>
+      );
+    } else if (auth && success) {
+      return (
+        <div className={s["event-modal__message"]}>
+          Вы уже зарегистрированны на это мероприятие
+        </div>
+      );
+    } else {
+      return (
+        <div className={s["event-modal__message"]}>
+          Чтобы записаться на мероприятие, нужно авторизоваться
+        </div>
+      );
+    }
+  };
+
+  if (!event) return null;
+
+  return (
+    <Modal active={modalEventActive} setActive={setModalEventActive}>
+      <div className={s["event-modal"]}>
+        <div className={s["event-modal__title"]}>{event.title}</div>
+        <div
+          className={`${s["event-card__event-mark"]} ${
+            event.status === "SCHEDULED" ? s["sheduled"] : ""
+          }`}
+        />
+        <div className={s["event-modal__address"]}>{concatAddress(event)}</div>
+        <div className={s["event-modal__date"]}>{formatDate(event)}</div>
+        <div className={s["event-modal__organizer-name"]}>
+          Организатор: {event.organiser_name}
+        </div>
+        <div className={s["event-modal__organizer-number"]}>
+          Телефон: {event.organiser_phone}
+        </div>
+        <div className={s["event-modal__description"]}>{event.description}</div>
+        {showRegisterButton()}
+      </div>
+    </Modal>
+  );
+};
+
+export default EventModal;
