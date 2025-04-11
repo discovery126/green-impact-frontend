@@ -4,17 +4,19 @@ import EventService from "../../http/EventService";
 import EventModal from "../EventModal";
 import { toast } from "react-toastify";
 import { concatAddress, formatDate } from "../../util/UtilService";
+import EventMap from "../EventMap";
 
 const EventsMainSection = () => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [modalEventActive, setModalEventActive] = useState(false);
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem("viewMode") || "list";
+  });
 
   const fetchEvents = async () => {
     try {
       const response = await EventService.getAllEvents();
-      console.log(response.data.data);
       setEvents(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
@@ -37,13 +39,16 @@ const EventsMainSection = () => {
         refreshEvents={refreshEvents}
       />
       <div className={s["events-main-wrapper"]}>
-        <div className={s["events-main-container"]}>
+        <div className="container">
           <div className={s["view-buttons-container"]}>
             <button
               className={`${s["view-button"]} ${
                 viewMode === "list" ? s["active"] : ""
               }`}
-              onClick={() => setViewMode("list")}
+              onClick={() => {
+                setViewMode("list");
+                localStorage.setItem("viewMode", "list");
+              }}
             >
               Список
             </button>
@@ -51,7 +56,10 @@ const EventsMainSection = () => {
               className={`${s["view-button"]} ${
                 viewMode === "map" ? s["active"] : ""
               }`}
-              onClick={() => setViewMode("map")}
+              onClick={() => {
+                setViewMode("map");
+                localStorage.setItem("viewMode", "map");
+              }}
             >
               Карта
             </button>
@@ -87,7 +95,9 @@ const EventsMainSection = () => {
               ))}
             </div>
           ) : (
-            <div className={s["map-placeholder"]}>Здесь будет карта</div>
+            <>
+              <EventMap events={events} />
+            </>
           )}
         </div>
       </div>

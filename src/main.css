@@ -17,6 +17,10 @@ body {
   max-width: 1280px;
 }
 
+.leaflet-control-attribution .leaflet-attribution-flag {
+  display: none !important;
+}
+
 .Toastify__toast-container {
   z-index: 9999;
 }
