@@ -28,7 +28,7 @@ const EventMap = ({ events }) => {
     popupAnchor: [1, -34],
     shadowSize: [41, 41],
   });
-  const gettingLocation = () => {
+  const getCenter = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -41,22 +41,17 @@ const EventMap = ({ events }) => {
         }
       );
     } else {
-      toast.info("Геолокация не поддерживается этим браузером.");
-      console.error("Геолокация не поддерживается этим браузером.");
-    }
-  };
-
-  const fetchCityData = async () => {
-    try {
-      const response = await CityService.getCities();
-      const cityList = response.data.data;
-      if (cityList.length > 0) {
-        const defaultCity = cityList[0];
-        setDefaultCity(defaultCity);
+      try {
+        const response = await CityService.getCities();
+        const cityList = response.data.data;
+        if (cityList.length > 0) {
+          const defaultCity = cityList[0];
+          setDefaultCity(defaultCity);
+        }
+      } catch (error) {
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+        console.error("Ошибка при получении списка городов:", error);
       }
-    } catch (error) {
-      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
-      console.error("Ошибка при получении списка городов:", error);
     }
   };
 
@@ -92,8 +87,7 @@ const EventMap = ({ events }) => {
   };
 
   useEffect(() => {
-    gettingLocation();
-    fetchCityData();
+    getCenter();
   }, []);
 
   useEffect(() => {
