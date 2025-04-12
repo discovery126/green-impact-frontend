@@ -16,6 +16,7 @@ const EventModal = ({
   const [confirmed, setConfirmed] = useState(false);
   const [eventCode, setEventCode] = useState("");
   const { auth } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (event && auth) {
       fetchSuccess();
@@ -83,7 +84,9 @@ const EventModal = ({
         await EventService.confirmEvent(event.id, eventCode);
         refreshEvents();
         setModalEventActive(false);
-        toast.success("Вы подтвердили своё присутствие");
+        toast.success(
+          `Вы подтвердили своё присутствие и получили ${event.event_points}`
+        );
       }
     } catch (error) {
       if (error.response?.status === 400) {

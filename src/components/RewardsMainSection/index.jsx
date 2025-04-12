@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import s from "./index.module.scss";
 import UserService from "../../http/UserService";
 import RewardService from "../../http/RewardService";
-import { formatPoints } from "../../util/UtilService";
-import RewardModal from "../RewardModal/";
 import { useSelector } from "react-redux";
+import Rewards from "../Rewards";
+import { toast } from "react-toastify";
 const TasksMainSection = () => {
   const [user, setUser] = useState(null);
   const [rewards, setRewards] = useState([]);
-  const [modalRewardActive, setModalRewardActive] = useState(false);
-  const [selectedReward, setSelectedReward] = useState(null);
   const { auth } = useSelector((state) => state.auth);
 
   const getUser = async () => {
@@ -49,12 +47,6 @@ const TasksMainSection = () => {
 
   return (
     <>
-      <RewardModal
-        reward={selectedReward}
-        modalRewardActive={modalRewardActive}
-        setModalRewardActive={setModalRewardActive}
-        refreshRewards={refreshRewards}
-      />
       <div className={s["reward-section"]}>
         <div className="container">
           {user && (
@@ -62,28 +54,7 @@ const TasksMainSection = () => {
               Мои баллы : {user.points}
             </div>
           )}
-          <div className={s["rewards-content"]}>
-            <div className={s["rewards-cards"]}>
-              {rewards.map((reward) => (
-                <div
-                  key={reward.id}
-                  className={s["reward-card"]}
-                  onClick={() => {
-                    setSelectedReward(reward);
-                    setModalRewardActive(true);
-                  }}
-                >
-                  <span className={s["reward-card__category"]}>
-                    {reward.category.nameCategory}
-                  </span>
-                  <div className={s["reward-card__title"]}>{reward.title}</div>
-                  <span className={s["reward-card__cost"]}>
-                    {formatPoints(reward.cost_points)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Rewards rewards={rewards} refreshRewards={refreshRewards} />
         </div>
       </div>
     </>
