@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import RatingPage from "./page/RatingPage";
 import EventsPage from "./page/EventsPage";
 import ProfilePage from "./page/ProfilePage";
+import NotFoundPage from "./page/NotFoundPage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
   { path: "/rating", element: <RatingPage /> },
   { path: "/events", element: <EventsPage /> },
   { path: "/profile", element: <ProfilePage /> },
+  { path: "*", element: <NotFoundPage /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
