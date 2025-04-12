@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer";
 import Header from "../../components/Header/index";
 import RatingMainSection from "../../components/RatingMainSection";
 
@@ -6,6 +7,7 @@ const RatingPage = () => {
     <div>
       <Header />
       <RatingMainSection />
+      <Footer />
     </div>
   );
 };

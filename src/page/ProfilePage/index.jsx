@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer";
 import Header from "../../components/Header/index";
 import ProfileMainSection from "../../components/ProfileMainSection";
 
@@ -6,6 +7,7 @@ const ProfilePage = () => {
     <div>
       <Header />
       <ProfileMainSection />
+      <Footer />
     </div>
   );
 };

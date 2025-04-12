@@ -1,0 +1,42 @@
+.footer {
+  background-color: #2e7d32;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  color: #fff;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  max-width: 1200px;
+}
+
+.email-container,
+.phone-container {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.email-container {
+  gap: 10px;
+}
+
+.phone-container {
+  gap: 10px;
+}
+
+.email,
+.phone {
+  margin: 0;
+  font-size: 25px;
+}
+
+.email-container svg,
+.phone-container svg {
+  font-size: 30px;
+}

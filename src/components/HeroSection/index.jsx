@@ -9,14 +9,12 @@ const HeroSection = () => {
         <div className={s["hero-section__text"]}>
           Выполняй эко-задания, учавствуй в событиях, получай бонусы!
         </div>
-        <div>
-          <a href="/profile" className={s["hero-section__btn"]}>
-            Присоединяйся
-          </a>
-        </div>
+        <a href="/profile" className={s["hero-section__btn"]}>
+          Присоединяйся
+        </a>
       </div>
     </section>
   );
-}
+};
 
 export default HeroSection;
