@@ -21,7 +21,6 @@ const RewardModal = ({
       setModalRewardActive(false);
       toast.success("Награда получена");
     } catch (error) {
-      console.log(error.status === 400);
       if (error.status === 400) {
         toast.error(error.response.data.message[0]);
       } else if (error.status === 401) {

@@ -12,6 +12,7 @@ import AuthLoader from "./components/AuthLoader";
 import { ToastContainer } from "react-toastify";
 import RatingPage from "./page/RatingPage";
 import EventsPage from "./page/EventsPage";
+import ProfilePage from "./page/ProfilePage";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
   { path: "/rewards", element: <RewardsPage /> },
   { path: "/rating", element: <RatingPage /> },
   { path: "/events", element: <EventsPage /> },
+  { path: "/profile", element: <ProfilePage /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
