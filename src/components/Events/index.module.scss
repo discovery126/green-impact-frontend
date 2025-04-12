@@ -1,0 +1,89 @@
+.event-main-container {
+  display: flex;
+  justify-content: center;
+  .event-cards-container {
+    width: 844px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 10px;
+    column-gap: 10px;
+    font-weight: bold;
+    padding: 10px 16px;
+    .event-card {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      width: 400px;
+      height: 200px;
+
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      border: 1px solid black;
+      transition: transform 0.2s ease;
+      line-height: 1.5rem;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+      .event-card__header {
+        display: flex;
+        width: 100%;
+        gap: 4px;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .event-card__title {
+          font-size: 25px;
+          font-weight: 600;
+          color: #333333;
+        }
+
+        .sheduled {
+          width: 40px;
+          height: 10px;
+          background-color: #a5d6a7;
+        }
+        .active {
+          width: 40px;
+          height: 10px;
+          background-color: #ef9a9a;
+        }
+
+        .completed {
+          width: 40px;
+          height: 10px;
+          background-color: #90a4ae;
+        }
+      }
+      .event-card__address {
+        font-size: 18px;
+        color: #666666;
+      }
+
+      .event-card__date {
+        font-size: 18px;
+        color: #4caf50;
+      }
+
+      .event-card__details-button {
+        align-self: flex-start;
+        background-color: #3cb371;
+        color: white;
+        border: none;
+        padding: 8px;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
