@@ -1,6 +1,5 @@
 .outer-wrapper {
   background-color: #f5f5dc;
-  padding: 40px 0;
   min-height: 100vh;
 }
 
@@ -60,11 +59,9 @@
   background-color: #3cb371 !important;
   color: white !important;
 }
-
 .profile-main,
-.profile-rewards,
-.profile-actions,
-.profile-events {
+.profile-events,
+.profile-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,5 +90,46 @@
   ul {
     padding-left: 18px;
     list-style-type: disc;
+  }
+}
+.profile-rewards,
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 20px;
+  width: 100%;
+  min-width: 900px;
+  max-width: 1000px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.action-tabs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.action-tab {
+  display: flex;
+  gap: 12px;
+  font-size: 20px;
+  align-self: center;
+  padding: 8px 16px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  &.active {
+    background-color: #4caf50;
+    color: white;
   }
 }

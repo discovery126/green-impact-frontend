@@ -8,15 +8,15 @@
     gap: 0.7rem;
     width: 100%;
     max-width: 1200px;
-    padding: 16px 24px;
+    padding: 0 24px;
 
     .user-reward-card {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      background-color: #f5f7f9;
+      background-color: #fff;
       border: 1px solid #e0e0e0;
-      font-weight: bold;
+
       border-radius: 1rem;
       padding: 1.5rem;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);

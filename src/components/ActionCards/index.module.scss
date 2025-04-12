@@ -1,0 +1,86 @@
+.profile-actions {
+  padding: 0 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.task-cards-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.task-card {
+  width: 100%; 
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-card__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.task-card__status {
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.status-pending {
+  background-color: #f0ad4e;
+}
+
+.status-confirmed {
+  background-color: #5cb85c;
+}
+
+.status-rejected {
+  background-color: #d9534f;
+}
+
+.status-redeemed {
+  background-color: #4caf50;
+}
+
+.status-cancelled {
+  background-color: #f44336;
+}
+
+.status-pending {
+  background-color: #ff9800;
+}
+
+.task-card__info {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.task-card__points,
+.task-card__date {
+  margin: 4px 0;
+}

@@ -6,14 +6,18 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import Events from "../Events";
 import UserRewards from "../UserRewards";
+import { SpentRewards, CompletedTasks } from "../ActionCards";
 
 const ProfileMainSection = () => {
   const [activeTab, setActiveTab] = useState("info");
   const [user, setUser] = useState("");
   const [userEvents, setUserEvents] = useState([]);
   const [userRewards, setUserRewards] = useState([]);
+  const [userCompletedTasks, setUserCompletedTasks] = useState([]);
   const { auth } = useSelector((state) => state.auth);
+  const [activeOperationType, setActiveOperationType] = useState("received");
   const navigate = useNavigate();
+
   const getUserInfo = async () => {
     try {
       const response = await UserService.getUser();
@@ -24,7 +28,6 @@ const ProfileMainSection = () => {
       } else if (error.status === 401) {
         toast.error("Вы не авторизованы");
       } else {
-        console.log("Ошибка" + error);
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       }
     }
@@ -32,7 +35,6 @@ const ProfileMainSection = () => {
   const getUserEvents = async () => {
     try {
       const response = await UserService.getUserEvents();
-      console.log(response.data.data);
       setUserEvents(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
@@ -41,7 +43,17 @@ const ProfileMainSection = () => {
   const getUserRewards = async () => {
     try {
       const response = await UserService.getUserRewards();
+      console.log(response.data.data);
       setUserRewards(response.data.data);
+    } catch (error) {
+      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+    }
+  };
+  const getUserCompletedTasks = async () => {
+    try {
+      const response = await UserService.getUserCompletedTasks();
+      // console.log(response.data.data);
+      setUserCompletedTasks(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
@@ -50,12 +62,14 @@ const ProfileMainSection = () => {
     getUserInfo();
     getUserEvents();
   };
+
   useEffect(() => {
     if (!auth) {
       navigate("/");
     } else {
       refreshUserProfileMain();
       getUserRewards();
+      getUserCompletedTasks();
     }
   }, [auth]);
 
@@ -94,7 +108,6 @@ const ProfileMainSection = () => {
               Операции
             </button>
           </div>
-
           {activeTab === "info" && (
             <div>
               <div className={s["profile-main"]}>
@@ -123,11 +136,38 @@ const ProfileMainSection = () => {
               </div>
             </div>
           )}
-
           {activeTab === "rewards" && (
             <div className={s["profile-rewards"]}>
-              <h2>Мои награды</h2>
               <UserRewards userRewards={userRewards} />
+            </div>
+          )}
+          {activeTab === "actions" && (
+            <div className={s["profile-actions"]}>
+              <div className={s["action-tabs"]}>
+                <button
+                  className={`${s["action-tab"]} ${
+                    activeOperationType === "received" ? s.active : ""
+                  }`}
+                  onClick={() => setActiveOperationType("received")}
+                >
+                  Получение
+                </button>
+                <button
+                  className={`${s["action-tab"]} ${
+                    activeOperationType === "spent" ? s.active : ""
+                  }`}
+                  onClick={() => setActiveOperationType("spent")}
+                >
+                  Траты
+                </button>
+              </div>
+
+              {activeOperationType === "received" && (
+                <CompletedTasks userCompletedTasks={userCompletedTasks} />
+              )}
+              {activeOperationType === "spent" && (
+                <SpentRewards redeemedRewards={userRewards} />
+              )}
             </div>
           )}
         </div>

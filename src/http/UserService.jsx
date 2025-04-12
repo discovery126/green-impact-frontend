@@ -10,4 +10,7 @@ export default class UserService {
   static async getUserRewards() {
     return $api.get("/user/rewards");
   }
+  static async getUserCompletedTasks() {
+    return $api.get("/user/completed-tasks");
+  }
 }
