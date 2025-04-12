@@ -5,11 +5,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import Events from "../Events";
+import UserRewards from "../UserRewards";
 
 const ProfileMainSection = () => {
   const [activeTab, setActiveTab] = useState("info");
   const [user, setUser] = useState("");
   const [userEvents, setUserEvents] = useState([]);
+  const [userRewards, setUserRewards] = useState([]);
   const { auth } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const getUserInfo = async () => {
@@ -27,23 +29,33 @@ const ProfileMainSection = () => {
       }
     }
   };
-  const getUserEvent = async () => {
+  const getUserEvents = async () => {
     try {
       const response = await UserService.getUserEvents();
+      console.log(response.data.data);
       setUserEvents(response.data.data);
+    } catch (error) {
+      toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+    }
+  };
+  const getUserRewards = async () => {
+    try {
+      const response = await UserService.getUserRewards();
+      setUserRewards(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };
   const refreshUserProfileMain = () => {
     getUserInfo();
-    getUserEvent();
+    getUserEvents();
   };
   useEffect(() => {
     if (!auth) {
       navigate("/");
     } else {
       refreshUserProfileMain();
+      getUserRewards();
     }
   }, [auth]);
 
@@ -109,6 +121,13 @@ const ProfileMainSection = () => {
                   <p>Вы пока не записаны ни на одно мероприятие.</p>
                 )}
               </div>
+            </div>
+          )}
+
+          {activeTab === "rewards" && (
+            <div className={s["profile-rewards"]}>
+              <h2>Мои награды</h2>
+              <UserRewards userRewards={userRewards} />
             </div>
           )}
         </div>

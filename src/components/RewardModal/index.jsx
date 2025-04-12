@@ -10,14 +10,15 @@ const RewardModal = ({
   reward,
   modalRewardActive,
   setModalRewardActive,
-  refreshRewards,
+  refreshRewards = () => {},
+  userReward = null,
 }) => {
   const { auth } = useSelector((state) => state.auth);
   const handleExchangeReward = async () => {
     try {
       console.log(reward.id);
       await RewardService.claimReward(reward.id);
-      await refreshRewards();
+      refreshRewards();
       setModalRewardActive(false);
       toast.success("Награда получена");
     } catch (error) {
@@ -30,32 +31,52 @@ const RewardModal = ({
       }
     }
   };
+  const showContent = () => {
+    if (userReward) {
+      return (
+        <>
+          <div className={s["reward-modal"]}>
+            <div className={s["reward-modal__title"]}>{reward.title}</div>
+            <div className={s["reward-modal__description"]}>
+              {reward.description}
+            </div>
+            <div className={s["reward-modal__promo-code"]}>
+              {userReward.promo_code}
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <div className={s["reward-modal"]}>
+          <div className={s["reward-modal__title"]}>{reward.title}</div>
+          <div className={s["reward-modal__description"]}>
+            {reward.description}
+          </div>
+          <div className={s["reward-modal__cost"]}>
+            {formatPoints(reward.cost_points)}
+          </div>
 
+          {auth ? (
+            <button
+              className={s["reward-modal__btn"]}
+              onClick={() => handleExchangeReward()}
+            >
+              Обменять
+            </button>
+          ) : (
+            <div className={s["reward-modal__message"]}>
+              Чтобы обменивать награды, нужно авторизоваться
+            </div>
+          )}
+        </div>
+      );
+    }
+  };
   if (!reward) return null;
   return (
     <Modal active={modalRewardActive} setActive={setModalRewardActive}>
-      <div className={s["reward-modal"]}>
-        <div className={s["reward-modal__title"]}>{reward.title}</div>
-        <div className={s["reward-modal__description"]}>
-          {reward.description}
-        </div>
-        <div className={s["reward-modal__cost"]}>
-          {formatPoints(reward.cost_points)}
-        </div>
-
-        {auth ? (
-          <button
-            className={s["reward-modal__btn"]}
-            onClick={() => handleExchangeReward()}
-          >
-            Обменять
-          </button>
-        ) : (
-          <div className={s["reward-modal__message"]}>
-            Чтобы обменивать награды, нужно авторизоваться
-          </div>
-        )}
-      </div>
+      {showContent()}
     </Modal>
   );
 };

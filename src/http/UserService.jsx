@@ -7,4 +7,7 @@ export default class UserService {
   static async getUserEvents() {
     return $api.get("/user/events");
   }
+  static async getUserRewards() {
+    return $api.get("/user/rewards");
+  }
 }
