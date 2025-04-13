@@ -16,6 +16,7 @@ const TaskModal = ({
   const handleStartTask = async () => {
     try {
       await TaskService.takeTaskUser(task.id);
+      console.log(task.id);
       await refreshTasks();
       setModalTaskActive(false);
       toast.success("Задание успешно взято");

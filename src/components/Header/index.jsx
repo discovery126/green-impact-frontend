@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import s from "./index.module.scss";
 import AuthModal from "../AuthModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginModal } from "../../store/slices/authModalSlice";
 
 const Header = () => {
   const { auth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
     <header className={s["header"]}>
       <div className="container">
@@ -45,7 +47,14 @@ const Header = () => {
                 </a>
               </li>
             ) : (
-              <AuthModal />
+              <li className={s["nav-list__item-btn"]}>
+                <button
+                  className={s["nav-list__link"]}
+                  onClick={() => dispatch(setLoginModal())}
+                >
+                  Вход
+                </button>
+              </li>
             )}
           </ul>
         </div>

@@ -4,17 +4,21 @@ import { Form } from "../Form";
 import s from "./index.module.scss";
 import AuthService from "../../http/AuthService";
 import { useDispatch, useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { fetchToken } from "../../store/slices/authSlice";
+import {
+  clearModal,
+  setLoginModal,
+  setRegisterModal,
+} from "../../store/slices/authModalSlice";
 
 const AuthModal = () => {
-  const [modalLoginActive, setModalLoginActive] = useState(false);
-  const [modalRegisterActive, setModalRegisterActive] = useState(false);
   const dispatch = useDispatch();
-  const { loading, error, isSuccess } = useSelector((state) => state.auth);
+  const { modalType } = useSelector((state) => state.authModal);
 
   const handleLoginSubmit = async (values) => {
     dispatch(fetchToken({ email: values.email, password: values.password }));
+    dispatch(clearModal());
   };
 
   const handleRegisterSubmit = async (values) => {
@@ -26,8 +30,7 @@ const AuthModal = () => {
       );
       console.log("Registration Data:", values);
       if (response.status === 201) {
-        setModalRegisterActive(false);
-        setModalLoginActive(true);
+        dispatch(clearModal());
         toast.success("Вы успешно зарегистрированы");
       }
     } catch (error) {
@@ -40,14 +43,10 @@ const AuthModal = () => {
   };
   return (
     <>
-      <li
-        className={s["nav-list__item-btn"]}
-        onClick={() => setModalLoginActive(true)}
+      <Modal
+        active={modalType === "login"}
+        setActive={() => dispatch(clearModal())}
       >
-        <div>Вход</div>
-      </li>
-
-      <Modal active={modalLoginActive} setActive={setModalLoginActive}>
         <Form
           title="Вход"
           onSubmit={handleLoginSubmit}
@@ -73,8 +72,7 @@ const AuthModal = () => {
               type="button"
               className={s["registration--text"]}
               onClick={() => {
-                setModalLoginActive(false);
-                setModalRegisterActive(true);
+                dispatch(setRegisterModal());
               }}
             >
               Зарегистрироваться
@@ -83,7 +81,10 @@ const AuthModal = () => {
         </Form>
       </Modal>
 
-      <Modal active={modalRegisterActive} setActive={setModalRegisterActive}>
+      <Modal
+        active={modalType === "register"}
+        setActive={() => dispatch(clearModal())}
+      >
         <Form
           title="Регистрация"
           onSubmit={handleRegisterSubmit}
@@ -115,8 +116,7 @@ const AuthModal = () => {
               type="button"
               className={s["login--text"]}
               onClick={() => {
-                setModalLoginActive(true);
-                setModalRegisterActive(false);
+                dispatch(setLoginModal());
               }}
             >
               Войти

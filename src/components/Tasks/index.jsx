@@ -28,7 +28,7 @@ const Tasks = ({ tasks, refreshTasks }) => {
         modalTaskActive={modalTaskActive}
         setModalTaskActive={setModalTaskActive}
         refreshTasks={refreshTasks}
-      />{" "}
+      />
       <div className={s["task-list"]}>
         {tasks.length === 0 ? (
           <div className={s["no-tasks-message"]}>

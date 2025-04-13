@@ -14,6 +14,7 @@ import RatingPage from "./page/RatingPage";
 import EventsPage from "./page/EventsPage";
 import ProfilePage from "./page/ProfilePage";
 import NotFoundPage from "./page/NotFoundPage";
+import AuthModal from "./components/AuthModal";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -44,6 +45,7 @@ root.render(
       <Provider store={store}>
         <RouterProvider router={router} />
         <AuthLoader />
+        <AuthModal />
       </Provider>
     </React.StrictMode>
   </>
