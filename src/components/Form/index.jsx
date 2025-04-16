@@ -42,4 +42,4 @@ const Form = ({ title, onSubmit, fields, buttonText, children }) => {
   );
 };
 
-export { Form };
+export default Form;

@@ -1,0 +1,70 @@
+.tasks-page {
+  margin-left: 150px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-panel {
+  margin: 10px 0;
+  background-color: #d1d1d1;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-item {
+  background-color: #f9f9f9;
+  filter: drop-shadow(0 2px 2px rgb(0, 0, 0, 0.3));
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.edit-button,
+.delete-button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #ccc;
+}
+
+.edit-button:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: red;
+  color: white;
+}
+.form_btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+h2 {
+  font-size: 25px;
+  padding: 10px;
+}

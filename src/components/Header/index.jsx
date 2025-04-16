@@ -43,7 +43,7 @@ const Header = () => {
             {auth ? (
               <li className={s["nav-list__item-btn"]}>
                 <a href="/profile" className={s["nav-list__link"]}>
-                  Профиль
+                  <span>Профиль</span>
                 </a>
               </li>
             ) : (

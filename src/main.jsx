@@ -14,6 +14,7 @@ import RatingPage from "./page/RatingPage";
 import EventsPage from "./page/EventsPage";
 import ProfilePage from "./page/ProfilePage";
 import NotFoundPage from "./page/NotFoundPage";
+import AdminPage from "./page/AdminPage";
 import AuthModal from "./components/AuthModal";
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   { path: "/rating", element: <RatingPage /> },
   { path: "/events", element: <EventsPage /> },
   { path: "/profile", element: <ProfilePage /> },
+  { path: "/admin", element: <AdminPage /> },
   { path: "*", element: <NotFoundPage /> },
 ]);
 

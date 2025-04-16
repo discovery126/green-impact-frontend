@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
-import { Form } from "../Form";
+import Form from "../Form";
 import s from "./index.module.scss";
 import AuthService from "../../http/AuthService";
 import { useDispatch, useSelector } from "react-redux";
