@@ -6,10 +6,10 @@ const Sidebar = ({ setActiveSection }) => {
   return (
     <div className={s["sidebar"]}>
       <ul>
-      <li>
+        <li>
           <Link
             to="#"
-            onClick={() => setActiveSection("completion_task")}
+            onClick={() => setActiveSection("completed-task")}
             className={s.active}
           >
             Выполненные задачи

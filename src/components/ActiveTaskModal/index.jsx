@@ -24,10 +24,9 @@ const ActiveTaskModal = ({
       });
     }
     formData.append("comment", comment);
-
     try {
       await TaskService.submitTaskFiles(activeTask.id, formData);
-      await refreshTasks();
+      refreshTasks();
       setModalTaskActive(false);
       setComment("");
       setFiles([]);

@@ -2,11 +2,14 @@ import { useState } from "react";
 import s from "./index.module.scss";
 import AdminTasksPage from "../../components/AdminComponents/AdminTasksPage";
 import Sidebar from "../../components/AdminComponents/Sidebar";
+import AdminCompletedTasksPage from "../../components/AdminComponents/AdminCompletedTasksPage";
 const AdminPage = () => {
-  const [activeSection, setActiveSection] = useState("tasks");
+  const [activeSection, setActiveSection] = useState("completed-task");
 
   const renderContent = () => {
     switch (activeSection) {
+      case "completed-task":
+        return <AdminCompletedTasksPage />;
       case "tasks":
         return <AdminTasksPage />;
     }

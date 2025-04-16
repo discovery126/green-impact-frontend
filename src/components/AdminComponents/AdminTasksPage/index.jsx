@@ -44,7 +44,7 @@ const AdminTasksPage = () => {
       } else if (error.status === 401) {
         toast.error("Вы не авторизованы");
       } else {
-        toast.error("Ошибка на сервере");
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
         console.error("Ошибка при загрузке заданий:", error);
       }
     }
@@ -72,7 +72,7 @@ const AdminTasksPage = () => {
       } else if (error.status === 400) {
         toast.error(error.response.data.message[0]);
       } else {
-        toast.error("Ошибка на сервере");
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
         console.error("Ошибка при загрузке заданий:", error);
       }
     }
@@ -90,7 +90,7 @@ const AdminTasksPage = () => {
       } else if (error.status === 401) {
         toast.error("Вы не авторизованы");
       } else {
-        toast.error("Ошибка на сервере");
+        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
         console.error("Ошибка при загрузке заданий:", error);
       }
     }
