@@ -16,8 +16,7 @@ const Tasks = ({ tasks, refreshTasks }) => {
       const now = new Date();
       return new Date(now.setHours(23, 59, 59, 999));
     } else {
-      return null;
-      // return new Date(task.expired_date);
+      return new Date(task.expired_date);
     }
   };
 

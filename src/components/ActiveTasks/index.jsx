@@ -2,11 +2,19 @@ import { formatPoints, selectType } from "../../util/UtilService";
 import s from "./index.module.scss";
 import { useState } from "react";
 import ActiveTaskModal from "../ActiveTaskModal";
+import CountdownTimer from "../CountDownTimer";
 
 const ActiveTasks = ({ activeTasks, auth, refreshTasks }) => {
   const [modalTaskActive, setModalTaskActive] = useState(false);
   const [selectedActiveTask, setSelectedActiveTask] = useState(null);
-  
+  const getExpiredDate = (task) => {
+    if (task.task_type === "DAILY") {
+      const now = new Date();
+      return new Date(now.setHours(23, 59, 59, 999));
+    } else {
+      return new Date(task.expired_date);
+    }
+  };
   return (
     <>
       <ActiveTaskModal
@@ -33,6 +41,11 @@ const ActiveTasks = ({ activeTasks, auth, refreshTasks }) => {
               >
                 <div className={s["active-tasks__card"]}>
                   <div className={s["active-tasks__header"]}>
+                    <CountdownTimer
+                      expiredDate={getExpiredDate(active_task)}
+                      top="null"
+                      left="200px"
+                    />
                     <div className={s["active-tasks__category"]}>
                       {active_task.category.category_name}
                     </div>

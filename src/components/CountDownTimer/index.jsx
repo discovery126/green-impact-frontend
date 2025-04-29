@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoTimerOutline } from "react-icons/io5";
 import s from "./index.module.scss";
 
-const CountdownTimer = ({ expiredDate }) => {
+const CountdownTimer = ({ expiredDate, top = "15px", left = "190px" }) => {
   const calculateTimeLeft = () => {
     const difference = new Date(expiredDate) - new Date();
     if (difference <= 0) return null;
@@ -26,7 +26,7 @@ const CountdownTimer = ({ expiredDate }) => {
   if (!timeLeft) return;
 
   return (
-    <div className={s["countdown"]}>
+    <div className={s["countdown"]} style={{ top, left }}>
       <IoTimerOutline />
       {timeLeft.days > 0 && `${timeLeft.days}д `}
       {timeLeft.hours}ч {timeLeft.minutes}м
