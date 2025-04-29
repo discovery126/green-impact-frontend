@@ -54,7 +54,15 @@ const TasksMainSection = () => {
               Мои баллы : {user.points}
             </div>
           )}
-          <Rewards rewards={rewards} refreshRewards={refreshRewards} />
+          <>
+            {rewards.length === 0 ? (
+              <div className={s["no-rewards-message"]}>
+                На данный момент наград нет
+              </div>
+            ) : (
+              <Rewards rewards={rewards} refreshRewards={refreshRewards} />
+            )}
+          </>
         </div>
       </div>
     </>

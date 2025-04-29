@@ -149,9 +149,17 @@ const ProfileMainSection = () => {
             </div>
           )}
           {activeTab === "rewards" && (
-            <div className={s["profile-rewards"]}>
-              <UserRewards userRewards={userRewards} />
-            </div>
+            <>
+              {userRewards.length === 0 ? (
+                <p className={s["no-user-rewards-message"]}>
+                  У вас пока нет наград. Но это легко исправить!
+                </p>
+              ) : (
+                <div className={s["profile-rewards"]}>
+                  <UserRewards userRewards={userRewards} />
+                </div>
+              )}
+            </>
           )}
           {activeTab === "actions" && (
             <div className={s["profile-actions"]}>
@@ -174,12 +182,23 @@ const ProfileMainSection = () => {
                 </button>
               </div>
 
-              {activeOperationType === "received" && (
-                <CompletedTasks userCompletedTasks={userCompletedTasks} />
-              )}
-              {activeOperationType === "spent" && (
-                <SpentRewards redeemedRewards={userRewards} />
-              )}
+              {activeOperationType === "received" &&
+                (userCompletedTasks.length === 0 ? (
+                  <div className={s["no-operation-completed-message"]}>
+                    У вас пока нет выполненных заданий
+                  </div>
+                ) : (
+                  <CompletedTasks userCompletedTasks={userCompletedTasks} />
+                ))}
+
+              {activeOperationType === "spent" &&
+                (userRewards.length === 0 ? (
+                  <div className={s["no-operation-spent-message"]}>
+                    Вы пока не тратили баллы на награды
+                  </div>
+                ) : (
+                  <SpentRewards redeemedRewards={userRewards} />
+                ))}
             </div>
           )}
         </div>

@@ -8,6 +8,11 @@
     margin: 0 auto;
     padding: 20px;
 
+    .no-rating-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .sort-buttons-container {
       display: flex;
       justify-content: center;

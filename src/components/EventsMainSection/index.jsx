@@ -57,7 +57,13 @@ const EventsMainSection = () => {
           </div>
           {viewMode === "list" ? (
             <>
-              <Events events={events} refreshEvents={refreshEvents} />
+              {events.length === 0 ? (
+                <div className={s["no-events-message"]}>
+                  На данный момент мероприятий нет
+                </div>
+              ) : (
+                <Events events={events} refreshEvents={refreshEvents} />
+              )}
             </>
           ) : (
             <>
