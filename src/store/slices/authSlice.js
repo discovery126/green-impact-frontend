@@ -2,10 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "../../http/AuthService";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import { clearModal } from "./authModalSlice";
 
 export const fetchToken = createAsyncThunk(
   "auth/fetchToken",
-  async function (_, { rejectWithValue }) {
+  async function (_, { rejectWithValue,dispatch }) {
     const errorMessage500 =
       "Не удается подключиться к серверу. Попробуйте позже.";
     try {
@@ -13,17 +14,18 @@ export const fetchToken = createAsyncThunk(
       if (response.status === 200) {
         localStorage.setItem("token", response.data.data.token);
         const decoded = jwtDecode(response.data.data.token);
+        dispatch(clearModal());
         return decoded.roles;
       }
     } catch (error) {
       if (!error.response) {
         return rejectWithValue(errorMessage500);
-      } else {
-        if (error.status === 401) {
-          return rejectWithValue(error.response.data.message[0]);
-        } else {
-          return rejectWithValue(error.response.data.message[0]);
-        }
+      } 
+      else if (error.status === 401) {
+        return rejectWithValue(error.response.data.message[0]);
+      }
+      else {
+        return rejectWithValue(error.response.data.message[0]);
       }
     }
   }
@@ -57,7 +59,7 @@ const authSlice = createSlice({
         state.error = null;
         state.auth = true;
         state.roles = action.payload.roles;
-        toast.success("Успешный вход")
+        toast.success("Успешный вход");
       }),
       builder.addCase(fetchToken.rejected, (state, action) => {
         state.error = action.payload;

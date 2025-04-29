@@ -18,7 +18,6 @@ const AuthModal = () => {
 
   const handleLoginSubmit = async (values) => {
     dispatch(fetchToken({ email: values.email, password: values.password }));
-    dispatch(clearModal());
   };
 
   const handleRegisterSubmit = async (values) => {
@@ -37,7 +36,7 @@ const AuthModal = () => {
       if (!error.response) {
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       } else {
-        toast.error(error.response.data["error_details"][0]);
+        toast.error(error.response.data.message[0]);
       }
     }
   };
