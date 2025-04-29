@@ -36,8 +36,19 @@ const EventMap = ({ events }) => {
           const location = [latitude, longitude];
           setUserLocation(location);
         },
-        (error) => {
+        async (error) => {
           console.error("Ошибка получения местоположения:", error);
+          try {
+            const response = await CityService.getCities();
+            const cityList = response.data.data;
+            if (cityList.length > 0) {
+              const defaultCity = cityList[0];
+              setDefaultCity(defaultCity);
+            }
+          } catch (error) {
+            toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+            console.error("Ошибка при получении списка городов:", error);
+          }
         }
       );
     } else {
@@ -76,14 +87,13 @@ const EventMap = ({ events }) => {
   };
 
   const handleRouteButtonClick = (eventLocation) => {
-    if (userLocation) {
-      fetchRoute(userLocation, eventLocation);
-    } else {
-      gettingLocation();
+    if (!userLocation) {
       toast.error(
-        "Чтобы построить маршрут, нужно разрешить определять местоположение"
+        "Чтобы построить маршрут, нужно разрешить определение местоположения."
       );
+      return;
     }
+    fetchRoute(userLocation, eventLocation);
   };
 
   useEffect(() => {
