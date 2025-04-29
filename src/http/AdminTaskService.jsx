@@ -1,4 +1,4 @@
-import $api from ".";
+import { $api } from ".";
 
 export default class AdminTaskService {
   static async getAllTasks() {

@@ -5,6 +5,7 @@ import { concatAddress, formatDate } from "../../util/UtilService";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import EventService from "../../http/EventService";
+import axios from "axios";
 
 const EventModal = ({
   event,
@@ -30,7 +31,6 @@ const EventModal = ({
   };
   const fetchConfirmed = async () => {
     const result = await isConfirmedUserEvent(event);
-    console.log(result);
     setConfirmed(result);
   };
 
@@ -39,6 +39,10 @@ const EventModal = ({
       const response = await EventService.checkConfirmed(event.id);
       return response.data.data.success;
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };
@@ -47,6 +51,10 @@ const EventModal = ({
       const response = await EventService.checkRegistered(event.id);
       return response.data.data.success;
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };
@@ -62,10 +70,12 @@ const EventModal = ({
         toast.error("Вы уже зарегистрированы на это мероприятие");
       }
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       if (error.status === 409 || error.status === 400) {
         toast.error(error.response.data.message[0]);
-      } else if (error.status === 401) {
-        toast.error("Вы не авторизованы");
       } else {
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
         console.error("Ошибка при записи на мероприятие:", error);
@@ -89,10 +99,12 @@ const EventModal = ({
         );
       }
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       if (error.response?.status === 400) {
         toast.error(error.response.data.message[0]);
-      } else if (error.response?.status === 401) {
-        toast.error("Вы не авторизованы");
       } else {
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
         console.error("Ошибка при записи на мероприятие:", error);

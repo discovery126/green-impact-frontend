@@ -5,6 +5,7 @@ import { formatPoints } from "../../util/UtilService";
 import RewardService from "../../http/RewardService";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const RewardModal = ({
   reward,
@@ -22,10 +23,12 @@ const RewardModal = ({
       setModalRewardActive(false);
       toast.success("Награда получена");
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       if (error.status === 400) {
         toast.error(error.response.data.message[0]);
-      } else if (error.status === 401) {
-        toast.error("Вы не авторизованы");
       } else {
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       }

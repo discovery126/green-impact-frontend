@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TaskService from "../../http/TaskService";
 import Categories from "../Categories";
 import Tasks from "../Tasks";
 import s from "./index.module.scss";
 import { useEffect, useState } from "react";
 import ActiveTasks from "../ActiveTasks";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { removeUser } from "../../store/slices/authSlice";
 
 const TasksMainSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Все");
@@ -12,42 +15,25 @@ const TasksMainSection = () => {
   const [tasks, setTasks] = useState([]);
   const [activeTasks, setActiveTasks] = useState([]);
   const { auth } = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
   const fetchCategories = async () => {
     try {
       const response = await TaskService.getAllTaskCategories();
       setCategories(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
-      console.error("Ошибка при загрузке категорий задач:", error);
+      console.error("Ошибка при загрузке категорий задач: ", error);
     }
   };
 
   const fetchUserTasks = async () => {
-    try {
-      const response = await TaskService.getUserTasks();
-      setTasks(response.data.data);
-    } catch (error) {
-      if (error.status === 401) {
-        toast.error("Вы не авторизованы");
-      } else {
-        toast.error("Не удается подключиться к серверу. Попробуйте позже.");
-        console.error("Ошибка при загрузке задач:", error);
-      }
-    }
+    const response = await TaskService.getUserTasks();
+    setTasks(response?.data.data);
   };
 
   const fetchActiveUserTasks = async () => {
-    try {
-      const response = await TaskService.getActiveTasks();
-      setActiveTasks(response.data.data);
-    } catch (error) {
-      if (error.status === 401) {
-        toast.error("Вы не авторизованы");
-      } else {
-        console.error("Ошибка при загрузке задач:", error);
-      }
-    }
+    const response = await TaskService.getActiveTasks();
+    setActiveTasks(response?.data.data);
   };
 
   const fetchAllTasks = async () => {
@@ -56,16 +42,26 @@ const TasksMainSection = () => {
       setTasks(response.data.data);
     } catch (error) {
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
-      console.error("Ошибка при загрузке задач:", error);
+      console.error("Ошибка при загрузке задач: ", error);
     }
   };
   const refreshTasks = async () => {
-    fetchCategories();
+    await fetchCategories();
     if (auth) {
-      fetchUserTasks();
-      fetchActiveUserTasks();
+      try {
+        await fetchUserTasks();
+        await fetchActiveUserTasks();
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("Запрос отменён:", error.message);
+          return;
+        } else {
+          toast.error("Не удается подключиться к серверу. Попробуйте позже.");
+          console.error("Ошибка при загрузке задач:", error);
+        }
+      }
     } else {
-      fetchAllTasks();
+      await fetchAllTasks();
     }
   };
   useEffect(() => {

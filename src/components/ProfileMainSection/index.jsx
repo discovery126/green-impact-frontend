@@ -23,10 +23,12 @@ const ProfileMainSection = () => {
       const response = await UserService.getUser();
       setUser(response.data.data);
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       if (error.status === 400) {
         toast.error(error.response.data.message[0]);
-      } else if (error.status === 401) {
-        toast.error("Вы не авторизованы");
       } else {
         toast.error("Не удается подключиться к серверу. Попробуйте позже.");
       }
@@ -37,24 +39,34 @@ const ProfileMainSection = () => {
       const response = await UserService.getUserEvents();
       setUserEvents(response.data.data);
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };
   const getUserRewards = async () => {
     try {
       const response = await UserService.getUserRewards();
-      console.log(response.data.data);
       setUserRewards(response.data.data);
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };
   const getUserCompletedTasks = async () => {
     try {
       const response = await UserService.getUserCompletedTasks();
-      // console.log(response.data.data);
       setUserCompletedTasks(response.data.data);
     } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log("Запрос отменён:", error.message);
+        return;
+      }
       toast.error("Не удается подключиться к серверу. Попробуйте позже.");
     }
   };

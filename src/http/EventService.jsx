@@ -1,8 +1,8 @@
-import $api from ".";
+import { $api, $basicApi } from ".";
 
 export default class EventService {
   static async getAllEvents() {
-    return $api.get(`/events`);
+    return $basicApi.get(`/events`);
   }
   static async registerEvent(eventId) {
     return $api.post(`user/events/${eventId}/register`);

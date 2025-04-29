@@ -1,7 +1,7 @@
-import $api from ".";
+import { $basicApi } from ".";
 
 export default class CityService {
   static async getCities() {
-    return $api.get("/cities");
+    return $basicApi.get("/cities");
   }
 }

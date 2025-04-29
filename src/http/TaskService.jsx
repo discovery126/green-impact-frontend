@@ -1,11 +1,11 @@
-import $api from ".";
+import { $api, $basicApi } from ".";
 
 export default class TaskService {
   static async getAllTasks() {
-    return $api.get("/tasks");
+    return $basicApi.get("/tasks");
   }
   static async getAllTaskCategories() {
-    return $api.get("/tasks/categories");
+    return $basicApi.get("/tasks/categories");
   }
   static async getUserTasks() {
     return $api.get("/user/tasks");
