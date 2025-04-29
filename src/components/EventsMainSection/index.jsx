@@ -8,7 +8,7 @@ import Events from "../Events";
 const EventsMainSection = () => {
   const [events, setEvents] = useState([]);
   const [viewMode, setViewMode] = useState(() => {
-    return localStorage.getItem("viewMode") || "list";
+    return sessionStorage.getItem("viewMode") || "list";
   });
 
   const fetchEvents = async () => {
@@ -38,7 +38,7 @@ const EventsMainSection = () => {
               }`}
               onClick={() => {
                 setViewMode("list");
-                localStorage.setItem("viewMode", "list");
+                sessionStorage.setItem("viewMode", "list");
               }}
             >
               Список
@@ -49,7 +49,7 @@ const EventsMainSection = () => {
               }`}
               onClick={() => {
                 setViewMode("map");
-                localStorage.setItem("viewMode", "map");
+                sessionStorage.setItem("viewMode", "map");
               }}
             >
               Карта
