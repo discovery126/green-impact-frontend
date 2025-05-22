@@ -88,7 +88,9 @@ const AdminCompletedTasksPage = () => {
             {completedTasks.map((completedTask) => (
               <li key={completedTask.id} className={s["task-item"]}>
                 <div>
-                  <h3>{completedTask.task?.title}</h3>
+                  <h3>
+                    <strong>{completedTask.task?.title}</strong>
+                  </h3>
                   <p>
                     <strong>Описание:</strong>{" "}
                     {completedTask.description || "—"}

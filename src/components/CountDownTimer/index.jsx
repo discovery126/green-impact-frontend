@@ -29,7 +29,7 @@ const CountdownTimer = ({ expiredDate, top = "15px", left = "190px" }) => {
     <div className={s["countdown"]} style={{ top, left }}>
       <IoTimerOutline />
       {timeLeft.days > 0 && `${timeLeft.days}д `}
-      {timeLeft.hours}ч {timeLeft.minutes}м
+      {timeLeft.hours > 0 && `${timeLeft.hours}ч `} {timeLeft.minutes}м
     </div>
   );
 };

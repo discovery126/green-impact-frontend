@@ -3,6 +3,7 @@ import s from "./index.module.scss";
 import AdminTasksPage from "../../components/AdminComponents/AdminTasksPage";
 import Sidebar from "../../components/AdminComponents/Sidebar";
 import AdminCompletedTasksPage from "../../components/AdminComponents/AdminCompletedTasksPage";
+import AdminEventsPage from "../../components/AdminComponents/AdminEventsPage";
 const AdminPage = () => {
   const [activeSection, setActiveSection] = useState("completed-task");
 
@@ -12,6 +13,12 @@ const AdminPage = () => {
         return <AdminCompletedTasksPage />;
       case "tasks":
         return <AdminTasksPage />;
+      case "events":
+        return <AdminEventsPage />;
+      case "rewards":
+        return <div>Награды</div>;
+      case "cities":
+        return <div>Города</div>;
     }
   };
 

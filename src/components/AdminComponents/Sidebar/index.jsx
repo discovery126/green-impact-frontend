@@ -1,55 +1,48 @@
-import React from "react";
 import s from "./index.module.scss";
-import { Link } from "react-router";
 
 const Sidebar = ({ setActiveSection }) => {
   return (
     <div className={s["sidebar"]}>
       <ul>
         <li>
-          <Link
-            to="#"
+          <button
             onClick={() => setActiveSection("completed-task")}
-            className={s.active}
+            className={s["active"]}
           >
             Выполненные задачи
-          </Link>
+          </button>
         </li>
         <li>
-          <Link
-            to="#"
+          <button
             onClick={() => setActiveSection("tasks")}
-            className={s.active}
+            className={s["active"]}
           >
             Задания
-          </Link>
+          </button>
         </li>
         <li>
-          <Link
-            to="#"
+          <button
             onClick={() => setActiveSection("events")}
-            className={s.active}
+            className={s["active"]}
           >
             Мероприятия
-          </Link>
+          </button>
         </li>
         <li>
-          <Link
-            to="#"
+          <button
             onClick={() => setActiveSection("rewards")}
-            className={s.active}
+            className={s["active"]}
           >
             Награды
-          </Link>
+          </button>
         </li>
         <li>
-          <Link
-            to="#"
+          <button
             onClick={() => setActiveSection("cities")}
-            className={s.active}
+           className={s["active"]}
           >
             Города
-          </Link>
+          </button>
         </li>
       </ul>
     </div>

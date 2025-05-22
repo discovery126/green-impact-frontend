@@ -35,7 +35,7 @@ const formatDate = (event) => {
   return `${startDate} - ${endDate}`;
 };
 const concatAddress = (event) => {
-  return `г. ${event.city.nameCity} ${event.street} ${
+  return `г. ${event.city.name_city}, ${event.street} ${
     event.house_number ? event.house_number : ""
   }`;
 };

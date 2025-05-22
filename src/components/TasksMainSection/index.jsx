@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import ActiveTasks from "../ActiveTasks";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { removeUser } from "../../store/slices/authSlice";
 
 const TasksMainSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Все");

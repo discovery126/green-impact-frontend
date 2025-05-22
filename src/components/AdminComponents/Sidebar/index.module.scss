@@ -14,8 +14,9 @@
     margin: 10px 0;
   }
 
-  a {
+  button {
     display: block;
+    width: 100%;
     padding: 10px;
     text-decoration: none;
     color: #333;
@@ -24,6 +25,9 @@
     &.active {
       background-color: #04911c;
       color: white;
+    }
+    &:hover {
+      background-color: #4caf50;
     }
   }
 }

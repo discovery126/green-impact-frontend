@@ -207,7 +207,7 @@ const AdminTasksPage = () => {
             onChange={(e) =>
               setCurrentTask({ ...currentTask, task_type: e.target.value })
             }
-            className={s["input"]}
+            className={s["select"]}
           >
             <option value="LIMITED">LIMITED</option>
             <option value="DAILY">DAILY</option>
@@ -238,7 +238,7 @@ const AdminTasksPage = () => {
                 category: selected || { id: 0, category_name: "" },
               }));
             }}
-            className={s["input"]}
+            className={s["select"]}
           >
             <option value="">Выберите категорию</option>
             {categories.map((category) => (
@@ -270,11 +270,17 @@ const AdminTasksPage = () => {
       )}
       <h2>Список задач</h2>
       {tasks.length > 0 ? (
-        <ul className={s["task-list"]}>
+        <div className={s["task-list"]}>
           {tasks.map((task) => (
-            <li key={task.id} className={s["task-item"]} data-task-id={task.id}>
+            <div
+              key={task.id}
+              className={s["task-item"]}
+              data-task-id={task.id}
+            >
               <div>
-                <strong>{task.title}</strong>
+                <h3>
+                  <strong>{task.title}</strong>
+                </h3>
                 <p>{task.description}</p>
                 <p>Баллы: {task.points}</p>
                 <p>Тип: {task.task_type}</p>
@@ -304,9 +310,9 @@ const AdminTasksPage = () => {
               >
                 Удалить
               </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Нет задач для отображения</p>
       )}
