@@ -87,6 +87,16 @@ const ProfileMainSection = () => {
 
   return (
     <div className={s["outer-wrapper"]}>
+      <button
+        className={s["logout-button"]}
+        onClick={() => {
+          localStorage.removeItem("token");
+          navigate("/");
+          window.location.reload();
+        }}
+      >
+        Выйти
+      </button>
       <div className="container">
         <div className={s["profile-container"]}>
           <div className={s["profile-tabs"]}>

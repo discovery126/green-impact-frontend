@@ -2,6 +2,27 @@
   background-color: #f5f5dc;
   min-height: 100vh;
 }
+.logout-button {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  top: 116px;
+  right: 110px;
+  z-index: 900;
+  background-color: #3cb371;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #d9363e;
+  }
+}
 
 .profile-container {
   padding: 24px;
