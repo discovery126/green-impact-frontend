@@ -1,7 +1,7 @@
 import axios from "axios";
 import { removeUser } from "../store/slices/authSlice";
 import store from "../store/";
-export const API_URL = "http://localhost:8080/api/v1";
+export const API_URL = import.meta.env.VITE_GREENIMPACT_API_URL;
 
 const $basicApi = axios.create({
   baseURL: API_URL,
@@ -21,7 +21,7 @@ $api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 $api.interceptors.response.use(
@@ -34,7 +34,7 @@ $api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export { $api, $basicApi };
